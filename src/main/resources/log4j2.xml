@@ -22,7 +22,7 @@
         </root>
 
         <!--局部日志级别-->
-        <logger level="off" name="com.itwang.LogTest">
+        <logger level="debug" name="com.auto.mapper.UserMapperTest">
         </logger>
     </loggers>
 

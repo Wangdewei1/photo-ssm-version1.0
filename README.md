@@ -46,3 +46,22 @@ SSM项目个人相册第一版
 - 异步响应数据
 #### 登录页图片
 ![登录页图片](http://pic.yupoo.com/wang123k/6d2477c1/82ee2914.png)
+
+## 目前运行
+期待宝贵的意见
+引入依赖后 -> 创建数据库 -> 静态资源 -> 配置springMvc.xml mybatis-config.xml jdbc.properties log4j2-> SSM -> 测试 -> 部署
+- 注意
+  - 这里jdbc需要改成你自己数据库的名字，我这里用的是mysql8.0 也支持5.5
+  - 数据库比较简单
+    - user表
+      - id
+      - username
+      - pwd 
+    - picture表
+      - id
+      - picture_name
+      - content 
+    - log表  
+      - id
+      - log_mesage
+      - log_date 

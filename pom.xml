@@ -7,7 +7,22 @@
     <version>1.0</version>
 
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.complier.target>1.8</maven.complier.target>
+        <maven.complier.source>1.8</maven.complier.source>
+    </properties>
+
     <dependencies>
+
+
+        <!--Hidden restful风格-->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.17.Final</version>
+        </dependency>
+        <!---->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

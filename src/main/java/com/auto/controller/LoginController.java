@@ -81,6 +81,11 @@ public class LoginController {
         );
     }
 
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
     @PostMapping
     public ResultVo insertUser(@RequestBody User user){
 
@@ -97,6 +102,11 @@ public class LoginController {
         );
     }
 
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
     @PutMapping
     public ResultVo updateUser(@RequestBody User user){
 
@@ -118,6 +128,11 @@ public class LoginController {
 
     }
 
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
     @DeleteMapping("{id}")
     public ResultVo deleteUserById(@PathVariable Integer id){
         if (id == null){
@@ -133,4 +148,5 @@ public class LoginController {
                 null
         );
     }
+
 }

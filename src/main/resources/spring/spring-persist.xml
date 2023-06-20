@@ -50,6 +50,23 @@
             </bean>
         </property>
 
+        <!--分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <!-- 设置 reasonable 为 true 表示将页码进行合理化修正。页码的有效范围：1~总页数 -->
+                            <prop key="reasonable">true</prop>
+                            <!-- 数据库方言：同样都是 SQL 语句，拿到不同数据库中，在语法上会有差异 -->
+                            <!-- 默认情况下，按照 MySQL 作为数据库方言来运行 -->
+                            <prop key="helperDialect">mysql</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
     </bean>
     <!--配置MapperScannerConfigurer-->
     <mybatis-spring:scan base-package="${mybatis.base-package}"></mybatis-spring:scan>

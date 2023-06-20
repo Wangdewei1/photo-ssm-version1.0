@@ -11,4 +11,5 @@ public class Picture {
     private int id;
     private String picName;
     private String content;
+    private String imgPath;
 }

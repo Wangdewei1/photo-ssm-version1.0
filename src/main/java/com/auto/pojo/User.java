@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User {
-    private int id;//用户id
+    private Integer id;//用户id
     private String username;//用户姓名
     private String pwd;//用户密码
 

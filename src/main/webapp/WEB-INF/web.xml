@@ -5,6 +5,7 @@
          version="4.0">
 
 
+    <!--加载Spring解析-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/spring-web.xml</param-value>
@@ -41,4 +42,5 @@
         <filter-name>HiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 </web-app>

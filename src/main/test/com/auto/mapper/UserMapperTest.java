@@ -68,7 +68,7 @@ public class UserMapperTest {
      */
     @Test
     public void insertUser() {
-        Integer rows = userMapper.insertUser(new User(null,"赵七","123123"));
+        Integer rows = userMapper.insertUser("赵八","123123");
         logger.debug(rows + "行执行了");
     }
 

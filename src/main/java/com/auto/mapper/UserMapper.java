@@ -20,7 +20,7 @@ public interface UserMapper {
 
     Integer deleteUserById(Integer id);
 
-    Integer insertUser(User user);
+    Integer insertUser(@Param("username") String username,@Param("pwd") String pwd);
 
     Integer updateUser(User user);
 }

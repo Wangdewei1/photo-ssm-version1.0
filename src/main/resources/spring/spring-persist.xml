@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <!--开启持久层  mapper注解-->
+    <context:component-scan base-package="com.auto.mapper"></context:component-scan>
+
+    <!--加载jdbc.properties文件-->
+    <context:property-placeholder location="classpath:application.properties"></context:property-placeholder>
+
+    <!--创建Druid数据源-->
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${DriverClassName}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${name}"></property>
+        <property name="password" value="${password}"></property>
+    </bean>
+
+    <!--创建sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds"></property>
+        <!--扫描pojo包，并使用别名，多个用;隔开-->
+        <property name="typeAliasesPackage" value="${mybatis.type-aliases-package}"></property>
+        <!--扫描sql配置文件:mapper需要的xml文件-->
+        <property name="mapperLocations" value="${mybatis.mapper-location}"/>
+        <!--驼峰映射配置-->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <!--开启驼峰-->
+                <property name="mapUnderscoreToCamelCase" value="true"></property>
+                <!--开启主键自增-->
+                <property name="useGeneratedKeys" value="true"></property>
+            </bean>
+        </property>
+
+    </bean>
+    <!--配置MapperScannerConfigurer-->
+    <mybatis-spring:scan base-package="${mybatis.base-package}"></mybatis-spring:scan>
+
+</beans>

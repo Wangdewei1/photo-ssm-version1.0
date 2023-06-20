@@ -22,8 +22,7 @@
         </root>
 
         <!--局部日志级别-->
-        <logger level="debug" name="com.auto.mapper.UserMapperTest">
-        </logger>
+        <logger level="debug" name="com.auto.mapper.UserMapperTest"></logger>
     </loggers>
 
 </configuration>

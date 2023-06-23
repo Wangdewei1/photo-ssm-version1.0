@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 图片相关操作
  */
@@ -40,5 +42,23 @@ public class PictureController {
                 page
         );
 
+    }
+
+    /**
+     * 查询所有图片
+     */
+    @GetMapping
+    public ResultVo findAllPicture(){
+        List<Picture> pictureList = pictureService.findAllPicture();
+        if (null == pictureList){
+            return new ResultVo(
+                    false,"没有图片",null
+            );
+        }
+        return new ResultVo(
+                true,
+                "操作成功",
+                pictureList
+        );
     }
 }

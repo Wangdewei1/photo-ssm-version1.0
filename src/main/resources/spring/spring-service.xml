@@ -28,4 +28,14 @@
     <!--导入持久层配置-->
     <import resource="classpath:spring/spring-persist.xml"></import>
 
+    <!--开启aop注解-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    <!--创建外部DatasourceTransactionManager-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds"></property>
+    </bean>
+    <!--开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
 </beans>

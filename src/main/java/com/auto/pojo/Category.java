@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Picture {
-    private int id;
-    private String picName;
-    private String content;
-    private String imgPath;
-//    private Integer cid;
+public class Category {
+    private Integer cid;
+
+    private String cname;
 }

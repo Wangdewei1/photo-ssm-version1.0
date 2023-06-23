@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>个人相册</title>
+    <link rel="stylesheet" href="css/boke/picture.css">
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="photoAPP">
+    <div class="album-container">
+        <h2 class="album-title">个人相册</h2>
+        <ul class="category-list">
+            <li v-for="category in categories" :key="category.id">
+                <a :class="{ active: category.id === selectedCategoryId }" @click="selectCategory(category.id)">
+                    {{ category.name }}
+                </a>
+            </li>
+        </ul>
+        <div class="photo-list">
+            <div v-for="photo in pictureList" :key="photo.id" class="photo-item">
+                <img :src="photo.imgPath" alt="照片">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#photoAPP',
+        data: {
+            categories: [],
+            selectedCategoryId: null,
+            photos: []
+        },
+        mounted() {
+            this.fetchCategories();
+            this.fetchPhotos();
+        },
+        computed: {
+            pictureList() {
+                if (this.selectedCategoryId) {
+                    return this.photos.filter(photo => photo.categoryId === this.selectedCategoryId);
+                } else {
+                    return this.photos;
+                }
+            }
+        },
+        methods: {
+            fetchCategories() {
+                axios.get('/api/categories')
+                    .then(response => {
+                        this.categories = response.data;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            fetchPhotos() {
+                axios.get('/api/photos')
+                    .then(response => {
+                        this.photos = response.data;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            selectCategory(categoryId) {
+                this.selectedCategoryId = categoryId;
+            }
+        }
+    });
+</script>
+</body>
+</html>

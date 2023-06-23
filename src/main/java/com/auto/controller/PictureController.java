@@ -29,12 +29,11 @@ public class PictureController {
     @GetMapping("{currentPage}/{pageSize}")
     public ResultVo findUserPageWithCurrentPageAndPageSize(@PathVariable Integer currentPage,
                                                            @PathVariable Integer pageSize){
+        //根据当前页，和每页显示数
         PageInfo<Picture> page = pictureService.findPage(currentPage, pageSize);
-
         if (page == null){
             return new ResultVo(false,"操作失败",null);
         }
-
         return new ResultVo(
                 true,
                 "操作成功",

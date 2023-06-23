@@ -43,7 +43,8 @@ public class PictureServiceImpl implements PictureService {
      */
     @Transactional(propagation = Propagation.SUPPORTS,readOnly = true)
     public List<Picture> findAllPicture() {
-        logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
+        //查看所有照片不添加日志了，耗内存，占资源访问时间
+//        logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
         return pictureMapper.findAllPage();
     }
 }

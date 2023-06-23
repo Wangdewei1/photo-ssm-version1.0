@@ -1,88 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>博客主页</title>
-    <base th:href="@{/}">
-    <link rel="stylesheet" th:href="@{css/boke/boke.css}">
-    <link rel="stylesheet" th:href="@{css/boke/form.css}">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <base th:href="@{/}"/>
+    <link rel="stylesheet" href="css/boke/index.css">
 </head>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <body>
-<div id="header">
-    <h1>快乐星球博客</h1>
-    <nav id="nav">
-        <a href="#">首页</a>
-        <a href="#">文章</a>
-        <a href="#">关于</a>
-        <a th:href="@{picture.html}">个人相册</a>
-        <a th:href="@{login.html}">登录</a>
-        <a href="#">注册</a>
-    </nav>
-</div>
-
-<div class="image-row">
-        <div class="image-container">
-            <div class="image-shadow">
-                <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片1">
-            </div>
-        </div>
-
-        <div class="image-container">
-            <div class="image-shadow">
-                <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片2">
-            </div>
-        </div>
-
-        <div class="image-container">
-            <div class="image-shadow">
-                <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片3">
-            </div>
-        </div>
-
-        <div class="image-container">
-            <div class="image-shadow">
-                <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片4">
-            </div>
-        </div>
-
-        <div class="image-container">
-            <div class="image-shadow">
-                <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片5">
-            </div>
-        </div>
-
-    <div class="image-container">
-        <div class="image-shadow">
-            <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片6">
-        </div>
+<div id="app">
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#" >个人相册</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">登录</a></li>
+            <li><a href="#">注册</a></li>
+        </ul>
     </div>
 
-    <div class="image-container">
-        <div class="image-shadow">
-            <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片7">
+    <div class="content">
+        <div v-for="picture in pictureList.slice(0,4)" :key="picture.id" @click="showPhoto(picture)" >
+            <img :src="'http://localhost:9090/photo' + picture.imgPath" alt="图片">
         </div>
     </div>
-
-    <div class="image-container">
-        <div class="image-shadow">
-            <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片8">
-        </div>
-    </div>
-
-    <div class="image-container">
-        <div class="image-shadow">
-            <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片9">
-        </div>
-    </div>
-
-    <div class="image-container">
-        <div class="image-shadow">
-            <img th:src="@{img/boke/1a160d77f4.jpg}" alt="图片10">
+    <div class="modal" v-if="selectedPhoto != null">
+        <div class="modal-content">
+            <span class="close" @click="closeModal">&times;</span>
+            <img :src="selectedPhoto.imgPath" alt="照片">
+            <h2>{{ selectedPhoto.picName }}</h2>
+            <p>{{ selectedPhoto.content }}</p>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" th:src="@{js/boke/boke.js}"></script>
-
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            pictureList: [],
+            selectedPhoto: null
+        },
+        created() {
+            this.loadAlbum();
+        },
+        methods: {
+            loadAlbum() {
+                axios.get('/photo/pic')
+                    .then(response => {
+                        // console.log(response.data); // 检查返回的数据
+                        if (response.data.status) {
+                            this.pictureList = response.data.data;
+                        } else {
+                            console.error(response.data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            showPhoto(photo) {
+                this.selectedPhoto = photo;
+            },
+            closeModal() {
+                this.selectedPhoto = null;
+            }
+        }
+    });
+</script>
 </body>
 </html>

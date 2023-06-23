@@ -10,4 +10,6 @@ public interface PictureService {
     PageInfo<Picture> findPage(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 
     List<Picture> findAllPicture();
+
+    List<Picture> getPictureListByCid(Integer cid);
 }

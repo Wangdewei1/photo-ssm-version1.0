@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Picture {
-    private int id;
+    private Integer id;
     private String picName;
     private String content;
     private String imgPath;
-//    private Integer cid;
+    private Integer cid;
 }

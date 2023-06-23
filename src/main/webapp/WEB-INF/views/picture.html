@@ -9,18 +9,21 @@
 </head>
 <body>
 <div id="photoAPP">
-    <div class="album-container">
+<!--    <div class="sidebar">-->
+<!--        <h3>分类</h3>-->
+<!--        <ul class="category-list">-->
+<!--            <li v-for="category in categoryList" :key="category.id">-->
+<!--                <a :class="{ active: category.id === selectedCategoryId }" @click="selectCategory(category.id)">-->
+<!--                    {{ category.name }}-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+    <div class="main-content">
         <h2 class="album-title">个人相册</h2>
-        <ul class="category-list">
-            <li v-for="category in categories" :key="category.id">
-                <a :class="{ active: category.id === selectedCategoryId }" @click="selectCategory(category.id)">
-                    {{ category.name }}
-                </a>
-            </li>
-        </ul>
         <div class="photo-list">
             <div v-for="photo in pictureList" :key="photo.id" class="photo-item">
-                <img :src="photo.imgPath" alt="照片">
+                <img :src="'http://localhost:9090/photo' + photo.imgPath" alt="照片">
             </div>
         </div>
     </div>
@@ -30,7 +33,7 @@
     new Vue({
         el: '#photoAPP',
         data: {
-            categories: [],
+            categoryList: [],
             selectedCategoryId: null,
             photos: []
         },
@@ -41,7 +44,7 @@
         computed: {
             pictureList() {
                 if (this.selectedCategoryId) {
-                    return this.photos.filter(photo => photo.categoryId === this.selectedCategoryId);
+                    return this.photos.filter(photo => photo.cid === this.selectedCategoryId);
                 } else {
                     return this.photos;
                 }
@@ -49,18 +52,18 @@
         },
         methods: {
             fetchCategories() {
-                axios.get('/api/categories')
+                axios.get('/photo/category')
                     .then(response => {
-                        this.categories = response.data;
+                        this.categoryList = response.data.data;
                     })
                     .catch(error => {
                         console.error(error);
                     });
             },
             fetchPhotos() {
-                axios.get('/api/photos')
+                axios.get('/photo/pic')
                     .then(response => {
-                        this.photos = response.data;
+                        this.photos = response.data.data;
                     })
                     .catch(error => {
                         console.error(error);

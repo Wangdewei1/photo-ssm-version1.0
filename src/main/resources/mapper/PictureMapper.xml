@@ -3,12 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.auto.mapper.PictureMapper">
-<!--    <select id="findPage" resultType="Picture">-->
-<!--        select * from user-->
-<!--        limit(#{currentPage-1},#{pageSize})-->
-<!--    </select>-->
 
+    <resultMap id="Base_All_Picture_By_Cid" type="Picture">
+        <id column="id" property="id"></id>
+        <result column="pic_name" property="picName"></result>
+        <result column="content" property="content"></result>
+        <result column="img_path" property="imgPath"></result>
+        <result column="cid" property="cid"></result>
+    </resultMap>
+
+    <!--查找所有图片-->
     <select id="findAllPage" resultType="Picture">
         select * from picture
+    </select>
+
+    <!--根据cid查找所有图片-->
+    <select id="getPictureListByCid" resultMap="Base_All_Picture_By_Cid">
+        select * from picture where cid = #{cid}
     </select>
 </mapper>

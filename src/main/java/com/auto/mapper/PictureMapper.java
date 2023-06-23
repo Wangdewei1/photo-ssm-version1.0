@@ -12,4 +12,5 @@ public interface PictureMapper {
 
     List<Picture> findAllPage();
 
+    List<Picture> getPictureListByCid(Integer cid);
 }

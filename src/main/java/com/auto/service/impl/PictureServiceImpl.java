@@ -47,4 +47,14 @@ public class PictureServiceImpl implements PictureService {
 //        logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
         return pictureMapper.findAllPage();
     }
+
+    /**
+     * 根据cid查找所有图片
+     * @param cid
+     * @return
+     */
+    public List<Picture> getPictureListByCid(Integer cid) {
+        logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
+        return pictureMapper.getPictureListByCid(cid);
+    }
 }

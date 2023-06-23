@@ -32,7 +32,7 @@ public class UserMapperTest {
                 "zhangsan",
                 "123456"
         );
-        User loginUser = userService.getUserByUsernameAndPassword(user);
+        User loginUser = userService.getUserByUsernameAndPassword(user.getUsername(),user.getPwd());
         logger.debug(loginUser + "");
     }
 

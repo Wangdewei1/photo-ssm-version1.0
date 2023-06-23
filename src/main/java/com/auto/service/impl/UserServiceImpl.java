@@ -21,15 +21,15 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登录操作
-     * @param user
+     * @param
      * @return
      */
     @Transactional(propagation = Propagation.SUPPORTS,readOnly = true) //如果当前存在事务，就加入该事务；如果当前不存在事务，就以非事务执行
-    public User getUserByUsernameAndPassword(User user) {
-        if (user != null){
+    public User getUserByUsernameAndPassword(String username,String pwd) {
+        if (username != null && pwd != null){
             //添加日志
             logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
-            return userMapper.selectUser(user.getUsername(),user.getPwd());
+            return userMapper.selectUser(username,pwd);
         }
         return null;
     }

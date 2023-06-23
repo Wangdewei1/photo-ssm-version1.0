@@ -3,24 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.auto.mapper.UserMapper">
+    <!--登录查询用户-->
     <select id="selectUser" resultType="User">
-        select u.* from user u
-        where u.username = #{username}
-        and u.pwd = #{pwd}
+        select * from user where username = #{username} and pwd = #{pwd}
+<!--        <where>-->
+<!--            <if test="username != null and username != ''">-->
+<!--                and username = #{username}-->
+<!--            </if>-->
+<!--            <if test="pwd != null and pwd != ''">-->
+<!--                and pwd = #{pwd}-->
+<!--            </if>-->
+<!--        </where>-->
     </select>
 
+    <!--根据id查询用户-->
     <select id="getUserById" resultType="User">
         select u.* from user u where u.id = #{id}
     </select>
 
+    <!--查询所有用户-->
     <select id="findAll" resultType="User">
         select * from user
     </select>
 
+    <!--新增用户-->
     <insert id="insertUser" useGeneratedKeys="true">
         insert into user values(null,#{username},#{pwd})
     </insert>
 
+    <!--更新用户-->
     <update id="updateUser">
         update user
         <set>
@@ -36,6 +47,7 @@
         </where>
     </update>
 
+    <!--删除用户根据id-->
     <delete id="deleteUserById">
         delete from user
         <where>

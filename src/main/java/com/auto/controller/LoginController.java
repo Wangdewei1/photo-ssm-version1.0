@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("user")
@@ -19,25 +21,18 @@ public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @PostMapping("/login{username}{pwd}")
-
-    public ResultVo<User> login(@PathVariable @RequestBody User user, Model model){
-        logger.debug(user + "");
-
+    @PostMapping("/login/{username}/{pwd}")
+    public ResultVo login(@PathVariable @RequestBody String username, @PathVariable @RequestBody String pwd){
         //登录
-        User loginUser = userService.getUserByUsernameAndPassword(user);
-
-        if (null == loginUser){
-            model.addAttribute("errorMsg", "登录失败，用户名或密码错误");
-            return new ResultVo<User>(
+        User user = userService.getUserByUsernameAndPassword(username,pwd);
+        logger.debug(user + "");
+        if (null == user){
+            return new ResultVo(
                     false,
                     "登陆失败,账户或密码不正确",
                     null
             );
         }
-
-        model.addAttribute("loginUser", loginUser);
-
         return new ResultVo(
                 true,
                 "登陆成功",

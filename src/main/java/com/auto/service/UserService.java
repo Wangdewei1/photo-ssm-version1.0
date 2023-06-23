@@ -1,6 +1,7 @@
 package com.auto.service;
 
 import com.auto.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * service 层 User相关操作
  */
 public interface UserService {
-    User getUserByUsernameAndPassword(User user);
+    User getUserByUsernameAndPassword(String username, String pwd);
 
     List<User> findAll();
 

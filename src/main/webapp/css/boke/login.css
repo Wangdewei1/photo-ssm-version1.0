@@ -1,0 +1,54 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("http://localhost:9090/photo/img/boke/哈士奇.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+.login-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    height: 400px;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form .form-group label {
+    font-weight: bold;
+}
+
+.login-form .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.login-form .form-group button {
+    background-color: blue;
+    height: 40px;
+    width: 100px;
+    margin-left: auto;
+    text-align: center;
+}
+
+.login-form .alert {
+    margin-top: 20px;
+}
+

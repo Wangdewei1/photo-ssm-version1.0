@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <link rel="stylesheet" href="css/boke/login.css">
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="loginApp">
+    <div class="login-container">
+        <h2 class="login-title">登录</h2>
+        <form @submit.prevent="login" class="login-form">
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" v-model="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" v-model="pwd" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">登录</button>
+            </div>
+            <div v-if="errorMessage" style="color: red" class="alert alert-danger">{{ errorMessage }}</div>
+        </form>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#loginApp',
+        data: {
+            username: '',
+            pwd: '',
+            errorMessage: ''
+        },
+        methods: {
+            login() {
+                axios.post('/photo/user/login/' + this.username + '/' + this.pwd)
+                    .then(response => {
+                        const result = response.data;
+                        if (result.status) {
+                            // 登录成功，跳转到其他页面或执行其他操作
+                            console.log('Login successful');
+                            console.log('User:', result.data);
+                        } else {
+                            // 登录失败，显示错误信息
+                            this.errorMessage = result.message;
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        this.errorMessage = '登陆失败，系统错误!';
+                    });
+            }
+        }
+    });
+</script>
+</body>
+</html>

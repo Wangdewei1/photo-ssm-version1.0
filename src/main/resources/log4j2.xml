@@ -17,7 +17,7 @@
 
         <!--root：用于指定项目的根日志，如果没有单独指定Logger，则会使用root作为默认的日志输出-->
         <!--全局日志级别-->
-        <root level="debug">
+        <root level="info">
             <appender-ref ref="Console"/>
         </root>
 

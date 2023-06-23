@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <base th:href="@{/}"/>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/admin/index.css">
+</head>
+<body>
+<div id="userManagementApp">
+    <h2>用户管理</h2>
+    <div class="form-container">
+        <div class="form-buttons">
+            <a href="#" @click="addUser">添加用户</a>
+            <a href="#" @click="clearForm">清空表单</a>
+        </div>
+    </div>
+    <table class="user-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="user in userList" :key="user.id">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+            <td>
+                <button @click="editUser(user)">编辑</button>
+                <button @click="deleteUser(user.id)">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    new Vue({
+        el: '#userManagementApp',
+        data: {
+            userList: [],
+            newUser: {
+                username: '',
+                password: ''
+            },
+            selectedUser: null
+        },
+        mounted() {
+            this.fetchUsers();
+        },
+        methods: {
+            fetchUsers() {
+                axios.get('/photo/user/findAll')
+                    .then(response => {
+                        this.userList = response.data.data;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            addUser() {
+                axios.post('/photo/user', this.newUser)
+                    .then(response => {
+                        this.userList.push(response.data.data);
+                        this.clearForm();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            editUser(user) {
+                this.selectedUser = user;
+                this.newUser.username = user.username;
+                this.newUser.password = user.password;
+            },
+            updateUser() {
+                axios.put('/photo/user' + this.selectedUser.id, this.newUser)
+                    .then(response => {
+                        const updatedUser = response.data.data;
+                        const index = this.userList.findIndex(user => user.id === updatedUser.id);
+                        if (index !== -1) {
+                            this.userList.splice(index, 1, updatedUser);
+                        }
+                        this.clearForm();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            deleteUser(userId) {
+                axios.delete('/photo/user/' + userId)
+                    .then(() => {
+                        this.userList = this.userList.filter(user => user.id !== userId);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            clearForm() {
+                this.selectedUser = null;
+                this.newUser.username = '';
+                this.newUser.password = '';
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -43,4 +43,12 @@ public class IndexController {
     public String toCategoryPage(){
         return "category";
     }
+
+    /**
+     * 登录后台管理页
+     */
+    @RequestMapping("/admin/index.html")
+    public String toAdminIndex(){
+        return "admin/index";
+    }
 }

@@ -15,4 +15,5 @@ public class User {
     private String username;//用户姓名
     private String pwd;//用户密码
 
+
 }

@@ -12,6 +12,7 @@
         <ul>
             <li><a href="index.html">首页</a></li>
             <li><a href="#" >个人相册</a></li>
+            <li><a href="#" >后台管理</a></li>
         </ul>
         <ul>
             <li><a href="#">登录</a></li>
@@ -19,17 +20,17 @@
         </ul>
     </div>
 
-    <div class="content">
-        <div v-for="picture in pictureList.slice(0,4)" :key="picture.id" @click="showPhoto(picture)" >
+    <div class="album">
+        <div class="photo" v-for="picture in pictureList.slice(0,8)" :key="picture.id" @click="showPhoto(picture)" >
             <img :src="'http://localhost:9090/photo' + picture.imgPath" alt="图片">
         </div>
     </div>
-    <div class="modal" v-if="selectedPhoto != null">
+    <div class="modal" v-if="selectedPhoto">
         <div class="modal-content">
-            <span class="close" @click="closeModal">&times;</span>
-            <img :src="selectedPhoto.imgPath" alt="照片">
-            <h2>{{ selectedPhoto.picName }}</h2>
-            <p>{{ selectedPhoto.content }}</p>
+<!--            <span class="close" @click="closeModal">&times;</span>-->
+<!--            <img :src="selectedPhoto.imgPath" alt="照片">-->
+<!--            <h2>{{ selectedPhoto.picName }}</h2>-->
+<!--            <p>{{ selectedPhoto.content }}</p>-->
         </div>
     </div>
 </div>
@@ -43,7 +44,7 @@
             pictureList: [],
             selectedPhoto: null
         },
-        created() {
+        mounted() {
             this.loadAlbum();
         },
         methods: {

@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>编辑用户</title>
-  <base th:href="@{/}">
-  <link rel="stylesheet" href="css/admin/edit.css">
-  <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <title>编辑用户</title>
+    <base th:href="@{/}">
+    <link rel="stylesheet" href="css/admin/edit.css">
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div id="editUserApp">
-  <h2>编辑用户</h2>
-  <form class="user-form">
-    <!--修改 put-->
-    <input type="hidden" name="_method" value="put">
+    <h2>编辑用户</h2>
+    <form class="user-form">
+        <!--修改 put-->
+        <input type="hidden" name="_method" value="put">
 
-    <div class="form-group">
-      <label for="username">用户名：</label>
-      <input type="text" id="username" v-model="selectedUser.username">
-    </div>
-    <div class="form-group">
-      <label for="password">密码：</label>
-      <input type="password" id="password" v-model="selectedUser.pwd">
-    </div>
-    <div class="form-buttons">
-      <button @click.prevent="updateUser">更新</button>
-      <button @click.prevent="clearForm">取消</button>
-    </div>
-  </form>
+        <div class="form-group">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" v-model="selectedUser.username">
+        </div>
+        <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" id="password" v-model="selectedUser.pwd">
+        </div>
+        <div class="form-buttons">
+            <button @click.prevent="updateUser">更新</button>
+            <button @click.prevent="clearForm">取消</button>
+        </div>
+    </form>
 </div>
 
 <script>
-  new Vue({
-    el: '#editUserApp',
-    data: {
-      selectedUser: {
-        id: 0,
-        username: '',
-        pwd: ''
-      }
-    },
-    mounted() {
-      this.fetchUser();
-    },
-    methods: {
-      fetchUser() {
-        const selectedUser = JSON.parse(localStorage.getItem('selectedUser'));
-        this.selectedUser = selectedUser;
-      //           // 获取用户ID的逻辑
-      //           axios.get(`/photo/user/${selectedUser.id}`)
-      //                   .then(response => {
-      //                     this.selectedUser = response.data.data;
-      //                   })
-      //                   .catch(error => {
-      //                     console.error(error);
-      //                   });
-      },
-      updateUser() {
-        axios.put(`/photo/user/${this.selectedUser.id}`, this.selectedUser)
-                .then(response => {
-                  console.log(response.data.data);
-                  alert('用户更新成功！');
-                  this.clearForm();
-                })
-                .catch(error => {
-                  console.error(error);
-                  alert('用户更新失败！');
-                });
-      },
-      clearForm() {
-        this.selectedUser.id = 0;
-        this.selectedUser.username = '';
-        this.selectedUser.password = '';
-      }
-    }
-  });
+    new Vue({
+        el: '#editUserApp',
+        data: {
+            selectedUser: {
+                id: 0,
+                username: '',
+                pwd: ''
+            }
+        },
+        mounted() {
+            this.fetchUser();
+        },
+        methods: {
+            fetchUser() {
+                const selectedUser = JSON.parse(localStorage.getItem('selectedUser'));
+                this.selectedUser = selectedUser;
+                //           // 获取用户ID的逻辑
+                //           axios.get(`/photo/user/${selectedUser.id}`)
+                //                   .then(response => {
+                //                     this.selectedUser = response.data.data;
+                //                   })
+                //                   .catch(error => {
+                //                     console.error(error);
+                //                   });
+            },
+            updateUser() {
+                axios.put(`/photo/user/${this.selectedUser.id}`, this.selectedUser)
+                    .then(response => {
+                        console.log(response.data.data);
+                        alert('用户更新成功！');
+                        this.clearForm();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        alert('用户更新失败！');
+                    });
+            },
+            clearForm() {
+                this.selectedUser.id = 0;
+                this.selectedUser.username = '';
+                this.selectedUser.password = '';
+            }
+        }
+    });
 </script>
 </body>
 </html>

@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
      * @param user
      * @return
      */
-    @Transactional(propagation = Propagation.SUPPORTS,readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     public Integer insertUser(User user) {
         if (user == null){
             return null;
@@ -80,11 +80,11 @@ public class UserServiceImpl implements UserService {
      * @param
      * @return
      */
-    @Transactional(propagation = Propagation.SUPPORTS,readOnly = false)
-    public Integer updateUser(User user) {
+    @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
+    public Integer updateUser(Integer id,String username,String pwd) {
         //添加日志
         logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
-        return userMapper.updateUser(new User(user.getId(),user.getUsername(),user.getPwd()));
+        return userMapper.updateUser(id,username,pwd);
     }
 
     /**
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
      * @param id
      * @return
      */
-    @Transactional(propagation = Propagation.SUPPORTS,readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     public Integer deleteUserById(Integer id) {
         //添加日志
         logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());

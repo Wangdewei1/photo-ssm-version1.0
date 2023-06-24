@@ -38,4 +38,6 @@
         </property>
     </bean>
 
+    <!--配置校验器-->
+
 </beans>

@@ -22,5 +22,5 @@ public interface UserMapper {
 
     Integer insertUser(@Param("username") String username,@Param("pwd") String pwd);
 
-    Integer updateUser(User user);
+    Integer updateUser(@Param("id") Integer id , @Param("username") String username , @Param("pwd") String pwd);
 }

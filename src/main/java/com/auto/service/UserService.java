@@ -17,7 +17,7 @@ public interface UserService {
 
     Integer insertUser(User user);
 
-    Integer updateUser(User user);
+    Integer updateUser(Integer id,String username,String pwd);
 
     Integer deleteUserById(Integer id);
 }

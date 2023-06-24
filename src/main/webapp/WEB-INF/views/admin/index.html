@@ -30,7 +30,7 @@
         <tr v-for="user in userList" :key="user.id">
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
-            <td>{{ user.password }}</td>
+            <td>{{ user.pwd }}</td>
             <td>
                 <a href="admin/edit.html" @click="editUser(user)">编辑</a>
                 <button @click="deleteUser(user.id)">删除</button>
@@ -47,7 +47,7 @@
             userList: [],
             newUser: {
                 username: '',
-                password: ''
+                pwd: ''
             },
             selectedUser: null,
             // isConfirm: false
@@ -80,7 +80,7 @@
                 //添加本地缓存
                 localStorage.setItem('selectedUser', JSON.stringify(user));
                 this.newUser.username = user.username;
-                this.newUser.password = user.password;
+                this.newUser.pwd = user.pwd;
             },
             updateUser() {
                 axios.put('/photo/user' + this.selectedUser.id, this.newUser)
@@ -99,7 +99,7 @@
             deleteUser(userId) {
                 let isConfirm = confirm("您确定要删除吗？")
 
-                if (isConfirm){
+                if (isConfirm) {
                     axios.delete('/photo/user/' + userId)
                         .then(() => {
                             this.userList = this.userList.filter(user => user.id !== userId);
@@ -112,7 +112,7 @@
             clearForm() {
                 this.selectedUser = null;
                 this.newUser.username = '';
-                this.newUser.password = '';
+                this.newUser.pwd = '';
             }
         }
     });

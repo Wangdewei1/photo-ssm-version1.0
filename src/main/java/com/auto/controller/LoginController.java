@@ -1,5 +1,7 @@
 package com.auto.controller;
 
+import com.auto.en.ResultEntity;
+import com.auto.gruop.ValidatedGroup;
 import com.auto.pojo.User;
 import com.auto.service.UserService;
 import com.auto.vo.ResultVo;
@@ -7,11 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("user")
@@ -82,12 +90,18 @@ public class LoginController {
      * @return
      */
     @PostMapping
-    public ResultVo insertUser(@RequestBody User user){
+    public ResultVo insertUser(@Validated(ValidatedGroup.InsertGroup.class) @RequestBody User user, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            List<String> list = bindingResult.getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).collect(Collectors.toList());
+            String errorMsg = list.get(0);
+            return new ResultVo(false,"操作失败",errorMsg);
+        }
 
         Integer rows = userService.insertUser(user);
 
         if (rows <= 0){
-            return new ResultVo(false,"添加失败",null);
+            return new ResultVo(false,"添加失败", ResultEntity.FAIL_RESULT.getData());
         }
 
         return new ResultVo(
@@ -99,26 +113,34 @@ public class LoginController {
 
     /**
      * 更新用户
-     * @param user
+     * @param
      * @return
      */
-    @PutMapping("{user.id}")
-    public ResultVo updateUser(@RequestBody User user){
+    @PutMapping("{id}")
+    public ResultVo updateUser(@NotNull(message = "用户id不能为空") @PathVariable Integer id ,
+                               @Validated(ValidatedGroup.UpdateGroup.class) @RequestBody User user,
+                               BindingResult bindingResult
+                               ){
 
-        if (user == null){
-            return new ResultVo(false,"修改失败",null);
+        if (bindingResult.hasErrors()){
+            List<String> list = bindingResult.getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).collect(Collectors.toList());
+            String errorMsg = list.get(0);
+            return new ResultVo(false,"操作失败",errorMsg);
         }
 
-        Integer rows = userService.updateUser(user);
+        Integer rows = userService.updateUser(id,user.getUsername(),user.getPwd());
 
         if (rows <= 0){
             return new ResultVo(false,"修改失败",null);
         }
 
+        //查询修改后的用户
+        User updateUser = userService.getUserById(id);
+
         return new ResultVo(
                 true,
                 "修改成功",
-                null
+                updateUser
         );
 
     }

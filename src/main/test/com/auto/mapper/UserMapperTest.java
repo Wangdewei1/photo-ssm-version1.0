@@ -77,7 +77,7 @@ public class UserMapperTest {
      */
     @Test
     public void updateUser() {
-        Integer rows = userMapper.updateUser(new User(2,"wangwu","123456"));
+        Integer rows = userMapper.updateUser(17,"wangwu","123123");
         logger.debug(rows + "");
     }
 }

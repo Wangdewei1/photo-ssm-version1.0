@@ -1,6 +1,7 @@
 package com.auto.service.impl;
 
 import com.auto.aspect.EveryServiceMethodTimeTotalAspect;
+import com.auto.exception.UserStatusException;
 import com.auto.mapper.LogMapper;
 import com.auto.mapper.UserMapper;
 import com.auto.pojo.User;
@@ -25,11 +26,16 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Transactional(propagation = Propagation.SUPPORTS,readOnly = true) //如果当前存在事务，就加入该事务；如果当前不存在事务，就以非事务执行
-    public User getUserByUsernameAndPassword(String username,String pwd) {
-        if (username != null && pwd != null){
+    public User getUserByUsernameAndPassword(User user) throws UserStatusException {
+
+        if (user.getUsername() == null || user.getPwd() == null){
+            throw new UserStatusException(401,"登陆失败,账户或密码不可以为空");
+        }
+
+        if (user.getUsername() != null && user.getPwd() != null){
             //添加日志
             logMapper.insertLogInfo(EveryServiceMethodTimeTotalAspect.getLogInfo());
-            return userMapper.selectUser(username,pwd);
+            return userMapper.selectUser(user);
         }
         return null;
     }

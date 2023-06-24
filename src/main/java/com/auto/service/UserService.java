@@ -1,5 +1,6 @@
 package com.auto.service;
 
+import com.auto.exception.UserStatusException;
 import com.auto.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * service 层 User相关操作
  */
 public interface UserService {
-    User getUserByUsernameAndPassword(String username, String pwd);
+    User getUserByUsernameAndPassword(User user) throws UserStatusException;
 
     List<User> findAll();
 

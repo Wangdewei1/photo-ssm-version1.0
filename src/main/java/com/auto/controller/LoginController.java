@@ -1,6 +1,7 @@
 package com.auto.controller;
 
 import com.auto.en.ResultEntity;
+import com.auto.exception.UserStatusException;
 import com.auto.gruop.ValidatedGroup;
 import com.auto.pojo.User;
 import com.auto.service.UserService;
@@ -29,22 +30,19 @@ public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @PostMapping("/login/{username}/{pwd}")
-    public ResultVo login(@PathVariable @RequestBody String username, @PathVariable @RequestBody String pwd){
+    @PostMapping("/login")
+    public ResultVo login(@RequestBody User user) throws UserStatusException {
         //登录
-        User user = userService.getUserByUsernameAndPassword(username,pwd);
-        logger.debug(user + "");
-        if (null == user){
-            return new ResultVo(
-                    false,
-                    "登陆失败,账户或密码不正确",
-                    null
-            );
+        User userLogin = userService.getUserByUsernameAndPassword(user);
+
+        if (userLogin == null){
+            throw new UserStatusException(401,"登陆失败，用户不存在！");
         }
+
         return new ResultVo(
                 true,
                 "登陆成功",
-                user
+                userLogin
         );
     }
 

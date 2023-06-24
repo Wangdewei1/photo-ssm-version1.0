@@ -1,5 +1,6 @@
 package com.auto.mapper;
 
+import com.auto.exception.UserStatusException;
 import com.auto.pojo.User;
 import com.auto.service.UserService;
 import org.junit.Test;
@@ -26,13 +27,13 @@ public class UserMapperTest {
      * 测试登录
      */
     @Test
-    public void selectUser() {
+    public void selectUser() throws UserStatusException {
         User user = new User(
                 1,
                 "zhangsan",
                 "123456"
         );
-        User loginUser = userService.getUserByUsernameAndPassword(user.getUsername(),user.getPwd());
+        User loginUser = userService.getUserByUsernameAndPassword(new User(null,"woaiwojia","12312312"));
         logger.debug(loginUser + "");
     }
 

@@ -1,5 +1,6 @@
 package com.auto.mapper;
 
+import com.auto.exception.UserStatusException;
 import com.auto.pojo.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Repository //此注解在此项目没有意义 ，为了让解决idea注入报错
 public interface UserMapper {
-    User selectUser(@Param("username") String username, @Param("pwd") String pwd);
+    User selectUser(User user);
 
     List<User> findAll();
 

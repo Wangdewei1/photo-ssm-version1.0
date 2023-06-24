@@ -5,15 +5,15 @@
 <mapper namespace="com.auto.mapper.UserMapper">
     <!--登录查询用户-->
     <select id="selectUser" resultType="User">
-        select * from user where username = #{username} and pwd = #{pwd}
-<!--        <where>-->
-<!--            <if test="username != null and username != ''">-->
-<!--                and username = #{username}-->
-<!--            </if>-->
-<!--            <if test="pwd != null and pwd != ''">-->
-<!--                and pwd = #{pwd}-->
-<!--            </if>-->
-<!--        </where>-->
+        select * from user
+        <where>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+        </where>
     </select>
 
     <!--根据id查询用户-->

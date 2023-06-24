@@ -51,4 +51,20 @@ public class IndexController {
     public String toAdminIndex(){
         return "admin/index";
     }
+
+    /**
+     * 后台管理 添加页面
+     */
+    @RequestMapping("/admin/add.html")
+    public String toAdminAddPage(){
+        return "admin/add";
+    }
+
+    /**
+     * 后台管理 编辑页面
+     */
+    @RequestMapping("/admin/edit.html")
+    public String toAdminEditPage(){
+        return "admin/edit";
+    }
 }

@@ -102,7 +102,7 @@ public class LoginController {
      * @param user
      * @return
      */
-    @PutMapping
+    @PutMapping("{user.id}")
     public ResultVo updateUser(@RequestBody User user){
 
         if (user == null){

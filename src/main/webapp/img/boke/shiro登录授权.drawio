@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-09-01T07:49:08.305Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0" etag="Ivnb-0a47pAq1H9FxKC0" version="21.7.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-09-01T07:54:41.783Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0" etag="6rNwOckj1rTnRxof7aPu" version="21.7.1" type="github">
   <diagram name="第 1 页" id="Z0AXajfdGdvqmnPmmERQ">
     <mxGraphModel dx="1434" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -20,10 +20,34 @@
           <mxGeometry x="620" y="60" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="zzMEKj-JJIgcN96Cs7aU-16" value="" style="verticalLabelPosition=top;verticalAlign=bottom;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;rotation=90;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;labelPosition=center;align=center;" vertex="1" parent="1">
-          <mxGeometry x="338" y="170" width="84" height="40" as="geometry" />
+          <mxGeometry x="38" y="190" width="84" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="zzMEKj-JJIgcN96Cs7aU-17" value="&lt;div&gt;验&lt;/div&gt;&lt;div&gt;证&lt;/div&gt;&lt;div&gt;不&lt;/div&gt;&lt;div&gt;通&lt;/div&gt;&lt;div&gt;过&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=0;" vertex="1" parent="1">
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-17" value="&lt;div&gt;验&lt;/div&gt;&lt;div&gt;证&lt;/div&gt;&lt;div&gt;通&lt;/div&gt;&lt;div&gt;过&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=0;" vertex="1" parent="1">
           <mxGeometry x="410" y="145" width="30" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-18" value="发放token" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="320" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-19" value="" style="verticalLabelPosition=top;verticalAlign=bottom;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;rotation=90;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;labelPosition=center;align=center;" vertex="1" parent="1">
+          <mxGeometry x="348" y="180" width="84" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-21" value="&lt;div&gt;网关访问gateway&lt;/div&gt;（后续）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="30" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-22" value="" style="verticalLabelPosition=top;verticalAlign=bottom;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;rotation=90;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;labelPosition=center;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="360" width="84" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-23" value="Nginx auth" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="30" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-24" value="" style="verticalLabelPosition=top;verticalAlign=bottom;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;rotation=90;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;labelPosition=center;align=center;" vertex="1" parent="1">
+          <mxGeometry x="46" y="544.5" width="84" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-26" value="访问 openAi" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="30" y="620" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zzMEKj-JJIgcN96Cs7aU-27" value="&lt;div&gt;验&lt;/div&gt;&lt;div&gt;证&lt;/div&gt;&lt;div&gt;通&lt;/div&gt;&lt;div&gt;过&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="519.5" width="30" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
